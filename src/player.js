@@ -262,6 +262,11 @@ export function ConnectPlayer(packet)
 
     console.log("Player connected: ", packet.name);
 
+    //delete old player object
+    var oldPlayer = PLAYERS.get(packet.name);
+    PLAYERS.delete(packet.name);
+    DeleteObject(oldPlayer);
+
     var player = new Player(packet.name, packet.accountType, 0x00ff00, {x:0, y:0});
     player.parsePacket(packet, true);
     PLAYERS.set(packet.name, player);
@@ -282,6 +287,7 @@ export function DisconnectPlayer(name)
         return;
 
     console.log("Player disconnected: ", name);
-    PLAYERS.delete(name);
-    DeleteObject(player);
+    player.changeColor(0x555555);
+    //PLAYERS.delete(name);
+    //DeleteObject(player);
 }

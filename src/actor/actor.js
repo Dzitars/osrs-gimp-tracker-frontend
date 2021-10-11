@@ -55,4 +55,12 @@ export class Actor extends WorldObject
         if(packet.pos != null)
             this.setTilePosition(packet.pos.x, packet.pos.y, packet.pos.z);
     }
+
+    changeColor(color) {
+        this.setGraphic(new PIXI.Graphics());
+        this.graphic.beginFill(color);
+        this.graphic.drawRect(0, 0, TILE_SIZE, TILE_SIZE);
+        this.graphic.endFill();
+        console.log("changed color of actor: ", this.name);
+    }
 }
