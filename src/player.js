@@ -264,8 +264,10 @@ export function ConnectPlayer(packet)
 
     //delete old player object
     var oldPlayer = PLAYERS.get(packet.name);
-    PLAYERS.delete(packet.name);
-    DeleteObject(oldPlayer);
+    if(oldPlayer != null) {
+        PLAYERS.delete(packet.name);
+        DeleteObject(oldPlayer);
+    }
 
     var player = new Player(packet.name, packet.accountType, 0x00ff00, {x:0, y:0});
     player.parsePacket(packet, true);
