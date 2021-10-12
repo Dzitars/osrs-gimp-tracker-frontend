@@ -289,7 +289,7 @@ export function DisconnectPlayer(name)
         return;
 
     console.log("Player disconnected: ", name);
-    player.changeColor(0x555555);
+    player.setActorOffline();
     //PLAYERS.delete(name);
     //DeleteObject(player);
 }

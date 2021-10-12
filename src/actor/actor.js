@@ -8,7 +8,16 @@ const ACTOR_TEXT_STYLE = new PIXI.TextStyle({
     strokeThickness:2,
     dropShadow : false,
     trim:true
-})
+});
+
+const ACTOR_TEXT_STYLE_OFFLINE = new PIXI.TextStyle({
+    fontFamily: 'OSRS Font',
+    fontSize:'16px',
+    fill: ['#555555'],
+    strokeThickness:2,
+    dropShadow : false,
+    trim:true
+});
 
 export class Actor extends WorldObject
 {
@@ -56,11 +65,12 @@ export class Actor extends WorldObject
             this.setTilePosition(packet.pos.x, packet.pos.y, packet.pos.z);
     }
 
-    changeColor(color) {
-        this.setGraphic(new PIXI.Graphics());
-        this.graphic.beginFill(color);
-        this.graphic.drawRect(0, 0, TILE_SIZE, TILE_SIZE);
-        this.graphic.endFill();
-        console.log("changed color of actor: ", this.name);
+    setActorOffline() {
+        if(this.label instanceof HudText) {
+            this.label.setStyle(ACTOR_TEXT_STYLE_OFFLINE);
+            console.log("Color set to offline for: ", this.name);
+        } else {
+            console.log("changeColor failed, no label object available");
+        }
     }
 }
